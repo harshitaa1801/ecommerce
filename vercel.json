@@ -8,7 +8,7 @@
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/static/$1"
+            "dest": "ecomm/wsgi.py"
         }
         ]
 }
