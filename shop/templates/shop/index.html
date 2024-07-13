@@ -1,4 +1,3 @@
-BASE_URL = 'http://127.0.0.1/shop'
 
 {% extends 'shop/basic.html' %}
 
@@ -7,10 +6,12 @@ BASE_URL = 'http://127.0.0.1/shop'
   .col-md-3 {
     display: inline-block;
     margin-left: -4px;
+    margin-bottom: 16px;
+    /* background-color: #F0F8FF; */
   }
 
   .carousel-indicators .active {
-    background-color: #007bff; /* Blue color */
+    background-color: #3C3633; /* Blue color */
   }
 
   .col-md-3 img {
@@ -18,6 +19,11 @@ BASE_URL = 'http://127.0.0.1/shop'
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-img-top {
+    width: 15%;
+    aspect-ratio: 5/6;
   }
 
   .carousel-control-prev-icon,
@@ -32,11 +38,29 @@ BASE_URL = 'http://127.0.0.1/shop'
     transform: translateY(-50%);
   }
 
+  .my-5 {
+    margin-bottom: 0rem!important;
+  }
+
+  .section-heading {
+    font-size: 24px; /* Increase font size */
+    font-weight: bold;
+    color: #3C3633; /* Change color */
+    text-align: center; /* Center align */
+    margin-top: 30px; /* Add spacing above */
+    margin-bottom: 20px; /* Add spacing below */
+    text-transform: uppercase; /* Make text uppercase */
+    border-bottom: 2px solid #3C3633; /* Add a bottom border */
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
   .card {
     margin-bottom: 20px;
     border: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 450px; /* Fixed height for product box */
+    height: 100%; /* Fixed height for product box */
+    background-color: #EEEDEB;
   }
 
   .card-title {
@@ -51,16 +75,16 @@ BASE_URL = 'http://127.0.0.1/shop'
 
   .btn-primary {
     background-color: #f8f8f8; /* Blue color */
-    border: 2px solid #3c25c4; /* Add a border */
+    border: 2px solid #3C3633; /* Add a border */
     border-radius: 5px; /* Add some rounded corners */
-    box-shadow: 0 2px 4px rgba(21, 180, 47, 0.1); /* Add a subtle shadow */
-    color: #3c25c4; /* Text color */
-    padding: 8px 16px; /* Padding */
+    box-shadow: 0 2px 4px rgba(116, 114, 100, 0.1); /* Add a subtle shadow */
+    color: #3C3633; /* Text color */
+    padding: 8px 12px; /* Padding */
     transition: background-color 0.3s ease; /* Smooth transition on hover */
 }
 
   .btn-primary:hover {
-    background-color: #0056b3; /* Darker blue color on hover */
+    background-color: #3C3633; /* Darker blue color on hover */
   }
 
   /* .whatsapp_icon img {
@@ -68,21 +92,96 @@ BASE_URL = 'http://127.0.0.1/shop'
     height: 20px; */
 /* } */
 
-.whatsapp_link {
+/* .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+  } */
+
+  /* .card-footer .btn {
+    flex: 1;
+    margin: -10 0px;
+    white-space: nowrap; /* Ensure the text does not wrap */
+    /* max-width: 48%;  */
+    /* text-align: center */
+  /* } */
+
+  .card-footer {
+  display: flex;
+  justify-content: space-around; /* Use space-around to distribute space evenly */
+  padding: 10px; /* Add some padding to the footer for better spacing */
+}
+
+.card-footer .btn {
+  flex: 1;
+  margin: 0 20px; /* Add a small margin for spacing between buttons */
+  white-space: nowrap; /* Ensure the text does not wrap */
+  text-align: center;
+  padding: 8px; /* Reduce padding to make buttons smaller */
+  min-width: 45%; /* Set a minimum width for the buttons */
+  box-sizing: border-box; /* Ensure padding and borders are included in the element's total width and height */
+}
+
+@media (max-width: 767px) {
+
+  .card {
+  height: 100%; 
+  }
+
+  .card-body {
+    padding: 10px; /* Adjust padding for mobile view */
+  }
+
+  .card-title {
+    font-size: 16px; /* Adjust font size for mobile view */
+  }
+
+  .card-text {
+    font-size: 14px; /* Adjust font size for mobile view */
+  }
+
+  .section-heading {
+      font-size: 20px; /* Adjust font size for mobile */
+      margin-top: 20px; /* Adjust top margin */
+      margin-bottom: 15px; /* Adjust bottom margin */
+    }
+
+
+  .card-footer {
+    flex-direction: row; /* Ensure buttons remain horizontal in mobile view */
+    padding: 5px; /* Adjust padding for mobile view */
+  }
+
+  .card-footer .btn {
+    max-width: 100%; /* Ensure buttons take up equal width in mobile view */
+    margin: 0 5px; /* Add margin for spacing between buttons */
+    padding: 5px; /* Adjust padding for better touch target on mobile */
+  }
+}
+
+
+  .card-footer .whatsapp_link {
     text-decoration: none; /* Remove underline from the link */
-}
+    flex: 1;
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
 
-.whatsapp_icon {
-    display: inline-block;
-    line-height: 20px; /* Adjust line height to vertically center the text */
-}
+  .card-footer .whatsapp_icon {
+    display: inline-flex;
+    align-items: center;
+  }
 
-.whatsapp_icon img {
+  .card-footer .whatsapp_icon img {
     width: 20px;
     height: 20px;
-    vertical-align: middle; /* Align the icon vertically with the text */
+    margin-left: 5px; /* Space between text and icon */
     background-color: transparent;
-}
+  }
 
 
 
@@ -93,7 +192,7 @@ BASE_URL = 'http://127.0.0.1/shop'
 <div class="container">
   <!-- Slideshow starts here -->
   {% for products, slides, range in allprods %}
-  <h2 class="my-5" style="color: #333;">{{ products.0.category }}</h2>
+  <h2 class="section-heading">{{ products.0.category }}</h2>
   <div class="row">
     <div id="demo{{ forloop.counter }}" class="col carousel slide my-3" data-ride="carousel">
       <ul class="carousel-indicators">
@@ -107,7 +206,7 @@ BASE_URL = 'http://127.0.0.1/shop'
         <div class="carousel-item active">
           <div class="row">
             {% for i in products %}
-            <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="col-6 col-sm-6 col-md-3">
               <div class="card" data-height="300px">
                 <img src='/media/{{ i.image }}' class="card-img-top" alt="{{ i.name }}">
                 <div class="card-body">
@@ -119,7 +218,7 @@ BASE_URL = 'http://127.0.0.1/shop'
                   <a href="/shop/products/{{ i.id }}"><button id="v{{ i.id }}" class="btn btn-primary cart">View</button></a>
                   <a href="https://api.whatsapp.com/send/?phone=%2B918864865605&text=Hi,%20I%20want%20to%20purchase%20this%20item%0A[http://127.0.0.1/shop/products/{{i.id}}]" class="whatsapp_link">
                     <div class="whatsapp_icon">
-                      <button class="btn btn-primary cart">Buy Item
+                      <button class="btn btn-primary cart">Buy
                       <img src="/media/shop/images/whatsapp_icon.png" width="20" height="20" alt="">
                     </button>  
                         
@@ -140,7 +239,6 @@ BASE_URL = 'http://127.0.0.1/shop'
           </div>
         </div>
       </div>
-
       <!-- left and right controls for the slide -->
       <a class="carousel-control-prev" href="#demo{{ forloop.counter }}" data-slide="prev">
         <span class="carousel-control-prev-icon"></span>
@@ -153,6 +251,8 @@ BASE_URL = 'http://127.0.0.1/shop'
   {% endfor %}
 </div>
 {% endblock %}
+
+
 
 {% block js %}
 <script>

@@ -82,7 +82,7 @@
 
 {% block css %}
 <!-- Global Styles -->
-
+<style>
 body {
     font-family: Arial, sans-serif;
 }
@@ -90,8 +90,8 @@ body {
 /* About Section */
 
 .about {
-    background: rgb(224, 251, 222);
-    background: linear-gradient(360deg, rgb(245, 255, 245) 0%, rgb(173, 252, 163) 100%);
+    background: rgb(238, 237, 235);
+    background: linear-gradient(360deg, rgb(238, 237, 235) 0%, rgb(116, 114, 100) 100%);
     padding: 100px 0 20px 0;
     text-align: center;
 }
@@ -138,19 +138,21 @@ body {
 button {
     border: none;
     outline: 0;
-<!--    padding: 10px;-->
+/* <!--    padding: 10px;--> */
     margin: 2rem;
     font-size: 1rem;
-    color: white;
-    background-color: #40b736;
+    color: #EEEDEB;
+    background-color: #3C3633;
     text-align: center;
     cursor: pointer;
-<!--    width: 15rem;-->
+/* <!--    width: 15rem;--> */
     border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #1f9405;
+    background-color: #E0CCBE;
+    color: #3C3633;
 }
 
 /* Team Section */
@@ -261,4 +263,5 @@ footer {
         margin: 0 1rem;
     }
 }
+</style>
 {% endblock %}
