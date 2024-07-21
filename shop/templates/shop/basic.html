@@ -31,8 +31,9 @@
           Category
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          {% for category in categories%}
+          <a class="dropdown-item" href="/shop/#{{ category.name|slugify }}">{{category.name}}</a>
+          {% endfor%}
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>

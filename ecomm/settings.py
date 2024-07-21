@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-k^gwy*3wzl*72!7eg&s&e1v@1hyi^(6_fu9nisiushs(ew)mg%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app',
+ALLOWED_HOSTS = ['.vercel.app', 'd9f7-103-191-112-152.ngrok-free.app',
                  '127.0.0.1']
 
 
@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'shop.context_processors.categories_processor',
             ],
         },
     },
