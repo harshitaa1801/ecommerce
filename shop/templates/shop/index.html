@@ -234,18 +234,26 @@
     }
 
   .card-footer {
-    flex-direction: column; /* Ensure buttons remain horizontal in mobile view */
-    padding: 5px; /* Adjust padding for mobile view */
-    background-color: #E0CCBE;
+  display: flex;
+  justify-content: center; /* Center the button in the footer */
+  padding: 4px; /* Add some padding for better spacing */
+  background-color: #E0CCBE; /* Keep a consistent background color */
+  border-top: 1px solid #ddd; /* Add a subtle border for distinction */
+  box-sizing: border-box;
+  overflow: hidden;
+}
 
-  }
 
-  .card-footer .btn {
-    max-width: 100%; /* Ensure buttons take up equal width in mobile view */
-    margin: 0 5px; /* Add margin for spacing between buttons */
-    padding: 5px; /* Adjust padding for better touch target on mobile */
-    font-size: 8px;
-  }
+.card-footer .btn {
+  margin: 0 auto; /* Center the button */
+  padding: 6px 20px; /* Increase padding for better clickability */
+  font-size: 12px; /* Set an appropriate font size */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3C3633; /* Consistent background */
+  color: #FFFFFF;
+}
 }
 
 
@@ -265,11 +273,10 @@
   }
 
   .card-footer .whatsapp_icon img {
-    width: 10px;
-    height: 10px;
-    margin-left: 5px; /* Space between text and icon */
-    background-color: transparent;
-  }
+  width: 16px; /* Reduce the size of the icon */
+  height: 16px; /* Keep it proportional */
+  margin-left: 8px; /* Space between text and icon */
+}
 
 
 
