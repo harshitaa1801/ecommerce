@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = ['.vercel.app', 'd9f7-103-191-112-152.ngrok-free.app',
                  '127.0.0.1', 'ecommerce-0nk8.onrender.com']
 
-
+CSRF_TRUSTED_ORIGINS= ['https://ecommerce-0nk8.onrender.com']
 # Application definition
 
 INSTALLED_APPS = [
