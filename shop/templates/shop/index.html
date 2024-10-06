@@ -327,12 +327,27 @@
                 </div>
               </div>
             </div>
+            
+            {% if is_mobile %}
+            {% if forloop.counter|divisibleby:2 and forloop.counter > 0 and not forloop.last %}
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="row">
+            {% endif %}
+            
+            {% else %}
             {% if forloop.counter|divisibleby:4 and forloop.counter > 0 and not forloop.last %}
           </div>
         </div>
         <div class="carousel-item">
           <div class="row">
             {% endif %}
+            {% endif %}
+            
+
+
+
             {% endfor %}
           </div>
         </div>

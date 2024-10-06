@@ -23,11 +23,11 @@ def index(request):
         else:
             num_of_slides = products_count // 4 + 1
 
-        # if is_mobile:
-        #     if products_count % 2 == 0:
-        #         num_of_slides = products_count // 2
-        #     else:
-        #         num_of_slides = products_count // 2 + 1
+        if is_mobile:
+            if products_count % 2 == 0:
+                num_of_slides = products_count // 2
+            else:
+                num_of_slides = products_count // 2 + 1
         
         # num_of_cards = 2 if is_mobile else 4
 
