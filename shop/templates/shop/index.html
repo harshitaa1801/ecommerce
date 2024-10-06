@@ -14,8 +14,40 @@
     display: inline-block;
     margin-left: -4px;
     margin-bottom: 16px;
+    padding-right: 8px;
+    padding-left: 8px;
     /* background-color: #F0F8FF; */
   }
+
+  dl, ol, ul {
+    margin-top: 0;
+    margin-bottom: 0rem;
+}
+
+.carousel-control-next-prev {
+  display: flex;
+  justify-content: space-evenly;
+}
+.carousel-indicators {
+    position: absolute;
+    right: 0;
+    bottom: -12px;
+    left: 0;
+    z-index: 15;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-left: 0;
+    margin-right: 15%;
+    margin-left: 15%;
+    list-style: none;
+    background-color: #EEEDEB;
+}
+
+.carousel-indicators li {
+  background-color: #747264;
+}
 
   .carousel-indicators .active {
     background-color: #3C3633; /* Blue color */
@@ -37,12 +69,14 @@
   .carousel-control-next-icon {
     background-color: #000; /* Black color */
     border-radius: 50%;
+    /* width: 12% */
   }
 
   .carousel-control-prev,
   .carousel-control-next {
     top: 50%;
     transform: translateY(-50%);
+    width: 6%
   }
 
   .my-5 {
@@ -81,14 +115,22 @@
   }
 
   .btn-primary {
-    background-color: #3C3633; /* Blue color */
-    border-color: #747264;
-
-    border-radius: 5px; /* Add some rounded corners */
-     box-shadow: 0 2px 4px rgba(116, 114, 100, 0.1); /*Add a subtle shadow */
-     color: #dfd8d4; /*Text color*/
-    padding: 8px 12px; /* Padding */
-    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    background-color: #3C3633; /* Bright color */
+    border-color: #3C3633;
+    color: #FFFFFF; /* White text */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
+    padding: 10px 20px; /* Padding for better size */
+    font-weight: bold; /* Bold text */
+    font-size: 14px; /* Font size */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition on hover */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 10px; /* Additional space at the top */
+    margin-bottom: 10px; /* Additional space at the bottom */
 }
 
   .btn-primary:hover {
@@ -137,8 +179,18 @@
 
 @media (max-width: 767px) {
 
+  .carousel-item .row .col-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+    /* Hide additional carousel items on mobile view */
+    /* .carousel-item:not(:first-child) {
+    display: none;
+  } */
   .card {
   height: 100%; 
+  padding: 2px;
   /* height: auto; */
 
   margin-bottom: 10px; 
@@ -151,7 +203,7 @@
   }
 
   .card-title {
-    font-size: 16px; /* Adjust font size for mobile view */
+    font-size: 8px; /* Adjust font size for mobile view */
   }
 
   /* .card-text {
@@ -176,7 +228,7 @@
 
 
   .card-footer {
-    flex-direction: row; /* Ensure buttons remain horizontal in mobile view */
+    flex-direction: column; /* Ensure buttons remain horizontal in mobile view */
     padding: 5px; /* Adjust padding for mobile view */
     background-color: #E0CCBE;
 
@@ -186,6 +238,7 @@
     max-width: 100%; /* Ensure buttons take up equal width in mobile view */
     margin: 0 5px; /* Add margin for spacing between buttons */
     padding: 5px; /* Adjust padding for better touch target on mobile */
+    font-size: 6px;
   }
 }
 
@@ -206,8 +259,8 @@
   }
 
   .card-footer .whatsapp_icon img {
-    width: 20px;
-    height: 20px;
+    width: 12px;
+    height: 12px;
     margin-left: 5px; /* Space between text and icon */
     background-color: transparent;
   }
@@ -235,16 +288,19 @@
         <div class="carousel-item active">
           <div class="row">
             {% for i in products %}
-            <div class="col-6 col-sm-6 col-md-3">
+            <div class="col-3 col-sm-6 col-md-3">
               <div class="card" data-height="250px">
+                <a href="/shop/products/{{ i.id }}">
                 <img src='/media/{{ i.image }}' class="card-img-top" alt="{{ i.name }}">
+              </a>
                 <div class="card-body">
-                  <h5 class="card-title">{{ i.name }}</h5>
+                  <a href="/shop/products/{{ i.id }}"><h5 class="card-title">{{ i.name }}</h5></a>
                   <p class="card-text">{{ i.description|slice:":100" }}{% if i.description|length > 100 %}...{% endif %}</p>
                 </div>
+              
                 <div class="card-footer">
                   <!-- <button id="p{{ i.id }}" class="btn btn-primary cart">Add To Cart</button> -->
-                  <a href="/shop/products/{{ i.id }}"><button id="v{{ i.id }}" class="btn btn-primary cart">View</button></a>
+                  <!-- <a href="/shop/products/{{ i.id }}"><button id="v{{ i.id }}" class="btn btn-primary cart">View</button></a> -->
                   <a href="https://api.whatsapp.com/send/?phone=%2B918864865605&text=Hi,%20I%20want%20to%20purchase%20this%20item%0A[http://127.0.0.1/shop/products/{{i.id}}]" class="whatsapp_link">
                     <div class="whatsapp_icon">
                       <button class="btn btn-primary cart">Buy
@@ -269,12 +325,14 @@
         </div>
       </div>
       <!-- left and right controls for the slide -->
+       <div class="carousel-control-next-prev">
       <a class="carousel-control-prev" href="#demo{{ forloop.counter }}" data-slide="prev">
         <span class="carousel-control-prev-icon"></span>
       </a>
       <a class="carousel-control-next" href="#demo{{ forloop.counter }}" data-slide="next">
         <span class="carousel-control-next-icon"></span>
       </a>
+    </div>
     </div>
   </div>
   {% endfor %}
