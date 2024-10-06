@@ -1,10 +1,15 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django_user_agents.utils import get_user_agent
+
 from .models import Product
 # Create your views here.
 
 
 def index(request):
+    user_agent = get_user_agent(request)
+    is_mobile = user_agent.is_mobile
+
     category = Product.objects.values('category', 'id')
     category_set = {item['category'] for item in category}
 
@@ -17,9 +22,20 @@ def index(request):
             num_of_slides = products_count // 4
         else:
             num_of_slides = products_count // 4 + 1
+
+        # if is_mobile:
+        #     if products_count % 2 == 0:
+        #         num_of_slides = products_count // 2
+        #     else:
+        #         num_of_slides = products_count // 2 + 1
+        
+        # num_of_cards = 2 if is_mobile else 4
+
+        
+            
         allprods.append([products, num_of_slides, range(1, num_of_slides)])
 
-    params = {'allprods': allprods}
+    params = {'allprods': allprods, 'is_mobile': is_mobile,}
     return render(request, 'shop/index.html', params)
 
 
