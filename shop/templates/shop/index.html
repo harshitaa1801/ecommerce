@@ -178,6 +178,10 @@
 }
 
 @media (max-width: 767px) {
+  .col-3.col-sm-6.col-md-3 {
+    flex: 0 0 50%; /* Set 50% width for 2 cards per row */
+    max-width: 50%;
+  }
 
   .carousel-item .row .col-6 {
     flex: 0 0 50%;
@@ -238,7 +242,7 @@
     max-width: 100%; /* Ensure buttons take up equal width in mobile view */
     margin: 0 5px; /* Add margin for spacing between buttons */
     padding: 5px; /* Adjust padding for better touch target on mobile */
-    font-size: 6px;
+    font-size: 8px;
   }
 }
 
@@ -259,8 +263,8 @@
   }
 
   .card-footer .whatsapp_icon img {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     margin-left: 5px; /* Space between text and icon */
     background-color: transparent;
   }
@@ -325,14 +329,14 @@
         </div>
       </div>
       <!-- left and right controls for the slide -->
-       <div class="carousel-control-next-prev">
+       <!-- <div class="carousel-control-next-prev">
       <a class="carousel-control-prev" href="#demo{{ forloop.counter }}" data-slide="prev">
         <span class="carousel-control-prev-icon"></span>
       </a>
       <a class="carousel-control-next" href="#demo{{ forloop.counter }}" data-slide="next">
         <span class="carousel-control-next-icon"></span>
       </a>
-    </div>
+    </div> -->
     </div>
   </div>
   {% endfor %}
