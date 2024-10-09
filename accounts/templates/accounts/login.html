@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Login Page</title>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login to Your Account</h2>
+        <form method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            
+            <button type="submit">Login</button>
+        </form>
+        <p><a href="{% url 'account_reset_password' %}">Forgot Password?</a></p>
+        <p>Don't have an account? <a href="{% url 'account_signup' %}">Sign up here</a></p>
+    </div>
+</body>
+</html>

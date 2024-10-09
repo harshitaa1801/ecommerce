@@ -34,13 +34,16 @@ CSRF_TRUSTED_ORIGINS= ['https://ecommerce-0nk8.onrender.com']
 
 INSTALLED_APPS = [
     'shop.apps.ShopConfig',
+    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_user_agents'
+    'django_user_agents',
+    'allauth',
+    'allauth.account',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +55,16 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_user_agents.middleware.UserAgentMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
+
+]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'accounts.auth_backend.PhoneNumberAuthBackend',
 ]
 
 ROOT_URLCONF = 'ecomm.urls'
@@ -117,6 +130,24 @@ USE_I18N = True
 
 USE_TZ = True
 
+ACCOUNT_FORMS = {
+    'signup': 'accounts.views.CustomSignupForm',
+    'login': 'accounts.views.CustomLoginForm',  # Adjust the path to point to your custom form
+}
+
+# Set email as not required, but keep verification behavior
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = "optional"
+
+LOGIN_REDIRECT_URL = '/shop/' 
+ACCOUNT_SIGNUP_REDIRECT_URL = '/shop/' 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Example: 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'harshitajn18@gmail.com'
+EMAIL_HOST_PASSWORD = 'aind wiuf gqwp gwxi'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/

@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django_user_agents.utils import get_user_agent
 
 from .models import Product
@@ -63,3 +63,13 @@ def tracker(request):
 
 def checkout(request):
     return HttpResponse('This is checkout page')
+
+
+def add_to_cart(request, id):
+    print('request: ', request)
+    print(request.user)
+    print(id)
+
+
+
+    return JsonResponse({'message':f'You are adding product id {id} to cart'})

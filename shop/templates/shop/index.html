@@ -177,6 +177,14 @@
   overflow: hidden;
 }
 
+.custom-arrow-icon {
+  color: #3C3633;  /* Replace with your desired color code */
+  margin-left: 8px;  /* Optional: adds some space between the category name and the icon */
+   /* TODO  Enable it when creating pages for different categories  */
+  /* cursor: pointer;  Change the cursor to a pointer to indicate the link is clickable */
+  transition: color 0.3s ease;
+}
+
 @media (max-width: 767px) {
   .col-3.col-sm-6.col-md-3 {
     flex: 0 0 50%; /* Set 50% width for 2 cards per row */
@@ -287,7 +295,12 @@
 <div class="container">
   <!-- Slideshow starts here -->
   {% for products, slides, range in allprods %}
-  <h2 id="{{ products.0.category.name|slugify }}" class="section-heading">{{ products.0.category }}</h2>
+  <h2 id="{{ products.0.category.name|slugify }}" class="section-heading">{{ products.0.category }}
+    <!-- TODO  Enable it when creating pages for different categories -->
+    <!-- <a href="/shop/category/{{ products.0.category.id }}" class="category-link"> -->
+      <i class="fas fa-chevron-right custom-arrow-icon"></i>
+    <!-- </a> -->
+  </h2>
   <div class="row">
     <div id="demo{{ forloop.counter }}" class="col carousel slide my-3" data-ride="carousel">
       <ul class="carousel-indicators">
@@ -312,7 +325,9 @@
                 </div>
               
                 <div class="card-footer">
-                  <!-- <button id="p{{ i.id }}" class="btn btn-primary cart">Add To Cart</button> -->
+                  <!-- <a href="/shop/add-to-cart/{{ i.id }}"><button id="p{{ i.id }}" class="btn btn-primary cart">Add To Cart</button></a> -->
+                  <button id="p{{ i.id }}" class="btn btn-primary cart" onclick="addToCart({{ i.id}} )">Add To Cart</button>
+
                   <!-- <a href="/shop/products/{{ i.id }}"><button id="v{{ i.id }}" class="btn btn-primary cart">View</button></a> -->
                   <a href="https://api.whatsapp.com/send/?phone=%2B918864865605&text=Hi,%20I%20want%20to%20purchase%20this%20item%0A[http://127.0.0.1/shop/products/{{i.id}}]" class="whatsapp_link">
                       <button class="btn btn-primary cart">Buy
@@ -369,15 +384,46 @@
 
 {% block js %}
 <script>
-  var cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+  // var cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
 
-  $('.cart').click(function() {
-    var id = this.id.toString();
+  // $('.cart').click(function() {
+  //   var id = this.id.toString();
 
-    cart[id] = (cart[id] !== undefined) ? cart[id] + 1 : 1;
+  //   cart[id] = (cart[id] !== undefined) ? cart[id] + 1 : 1;
 
-    localStorage.setItem('cart', JSON.stringify(cart));
-    document.getElementById('cart').innerHTML = Object.keys(cart).length;
-  });
+  //   localStorage.setItem('cart', JSON.stringify(cart));
+  //   document.getElementById('cart').innerHTML = Object.keys(cart).length;
+  // });
+
+
+
+  function addToCart(productId) {
+    console.log('inside cart fn')
+    console.log(productId)
+        fetch(`/shop/add-to-cart/${productId}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.message); // Display a message that the product has been added
+            updateCartCount(productId); // Update the cart count if you have this on your page
+        })
+        .catch(error => {
+            console.error('Error adding item to cart:', error);
+        });
+    }
+
+    function updateCartCount(id) {
+        // update the cart item count on the page
+        cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
+        cart[id] = (cart[id] !== undefined) ? cart[id] + 1 : 1;
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart').innerHTML = Object.keys(cart).length;
+
+    }
 </script>
 {% endblock %}
