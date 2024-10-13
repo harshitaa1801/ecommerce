@@ -18,15 +18,22 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from accounts.views import CustomSignupView, login_signup_view
 from shop.views import index
 from allauth.account import views as allauth_views
+from django.views.generic.base import RedirectView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('shop/', include('shop.urls')),
     # path('accounts/login/', include('allauth.urls')),
-    path('accounts/login/', allauth_views.LoginView.as_view(template_name='accounts/login.html'), name='account_login'),
-    path('accounts/signup/', allauth_views.SignupView.as_view(template_name='accounts/signup.html'), name='account_signup'),
+    path('accounts/login/', allauth_views.LoginView.as_view(template_name='accounts/login_signup.html'), name='account_login'),
+    # path('accounts/login/', login_signup_view, name='account_login_signup'),
+
+    # path('accounts/signup/', allauth_views.SignupView.as_view(template_name='accounts/login_signup.html'), name='account_signup'),
+    # path('accounts/signup/', RedirectView.as_view(url='/accounts/login/#signup', permanent=False), name='account_signup'),
+    path('accounts/signup/', CustomSignupView.as_view(), name='account_signup'),
 
     path('accounts/', include('allauth.urls')),
     # path('accounts/profile/', index)

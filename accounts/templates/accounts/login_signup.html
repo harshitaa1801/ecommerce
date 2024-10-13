@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Sign Up</title>
+    <!-- Load Bootstrap and other styles -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #EEEDEB; /* Light background */
+            color: #3C3633; /* Dark text color */
+        }
+
+        .card {
+            background-color: #E0CCBE; /* Lighter card background */
+            border: none; /* Remove card borders */
+            color: #3C3633; /* Text inside card */
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .form-group label {
+            color: #3C3633; /* Dark labels */
+        }
+
+        .form-control {
+            background-color: #EEEDEB; /* Input background */
+            border: 1px solid #747264; /* Input border */
+            color: #3C3633; /* Input text color */
+        }
+
+        .form-control:focus {
+            border-color: #3C3633; /* Darker border when focused */
+            box-shadow: none;
+        }
+
+        /* Toggle Buttons */
+        .toggle-button {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .toggle-button button {
+            border-color: #747264; /* Button border */
+        }
+
+        .btn-secondary {
+            background-color: #3C3633; /* Active button background */
+            color: #EEEDEB; /* Light button text */
+            border: none; /* No border for active button */
+        }
+
+        .btn-outline-secondary {
+            background-color: transparent;
+            color: #3C3633; /* Dark text for inactive button */
+            border: 1px solid #747264; /* Border for inactive button */
+        }
+
+        /* Buttons on form */
+        .btn-primary {
+            background-color: #3C3633; /* Darkest button background */
+            border-color: #3C3633; /* Button border */
+            color: #EEEDEB; /* Light button text */
+        }
+
+        .btn-primary:hover {
+            background-color: #747264; /* Hover background */
+            border-color: #747264; /* Hover border */
+            color: #EEEDEB;
+        }
+
+        /* Error messages */
+        .text-danger, .alert-danger {
+            margin: 8px 0px;
+            color: #fc0000; /* Dark text for error messages */
+            background-color: #E0CCBE; /* Lighter background for errors */
+            /* border: 1px solid #747264; Border for error message */
+        }
+
+        /* Form sections */
+        .form-section {
+            display: none;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6 col-lg-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="text-center mb-4" id="form-title">Login to Your Account</h3>
+
+                        <!-- Toggle Buttons -->
+                        <div class="toggle-button">
+                            <button id="login-btn" class="btn btn-secondary btn-sm">Login</button>
+                            <button id="signup-btn" class="btn btn-outline-secondary btn-sm">Sign Up</button>
+                        </div>
+
+                        <!-- Login Form -->
+                        <div id="login-form" class="form-section active">
+                            <form method="POST" action="{% url 'account_login' %}">
+                                {% csrf_token %}
+
+                                    <!-- Display non-field errors (e.g. invalid login credentials) -->
+                                {% if form.non_field_errors %}
+                                    <div class="alert alert-danger">
+                                        {{ form.non_field_errors }}
+                                    </div>
+                                {% endif %} 
+                                <!-- <div class="form-group mb-4">
+                                    <label for="id_phone_number">Phone Number</label>
+                                    <input type="text" id="id_phone_number" name="phone_number" class="form-control" value="{{ form.phone_number.value|default_if_none:'' }}">
+                                    {% if form.phone_number.errors %}
+                                        <small class="text-danger">{{ form.phone_number.errors }}</small>
+                                    {% endif %}
+                                </div> -->
+    
+                                <!-- Username input (optional) -->
+                                <div class="form-group mb-4">
+                                    <label for="id_username">Phone Number</label>
+                                    <input type="text" id="id_username" name="login" class="form-control" value="{{ form.username.value|default_if_none:'' }}">
+                                    {% if form.username.errors %}
+                                        <small class="text-danger">{{ form.username.errors }}</small>
+                                    {% endif %}
+                                </div>
+                            
+                                <!-- Password input -->
+                                <div class="form-group mb-4">
+                                    <label for="id_password">Password</label>
+                                    <input type="password" id="id_password" name="password" class="form-control">
+                                    {% if form.password.errors %}
+                                        <small class="text-danger">{{ form.password.errors }}</small>
+                                    {% endif %}
+                                </div>
+                            
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-primary btn-block mb-4">Login</button>
+                            </form>
+                            <p><a href="{% url 'account_reset_password' %}">Forgot Password?</a></p>
+                        </div>
+
+
+
+                        <!-- Sign Up Form -->
+                        <div id="signup-form" class="form-section">
+                            <form method="POST" action="{% url 'account_signup' %}">
+                                {% csrf_token %}
+                                <!-- Username input -->
+                                <div class="form-group mb-4">
+                                    <label for="id_username">Phone Number</label>
+                                    <input type="text" id="id_username" name="username" class="form-control" value="{{ form.username.value|default_if_none:'' }}">
+                                    {% if form.username.errors %}
+                                        <small class="text-danger">{{ form.username.errors }}</small>
+                                    {% endif %}
+                                </div>
+                            
+                                <!-- Email input -->
+                                <div class="form-group mb-4">
+                                    <label for="id_email">Email address (Optional)</label>
+                                    <input type="email" id="id_email" name="email" class="form-control" value="{{ form.email.value|default_if_none:'' }}">
+                                    {% if form.email.errors %}
+                                        <small class="text-danger">{{ form.email.errors }}</small>
+                                    {% endif %}
+                                </div>
+
+                                <!-- <div class="form-group">
+                                    <label for="id_phone_number">Phone Number</label>
+                                    <input type="text" name="phone_number" id="id_phone_number" class="form-control" maxlength="15">
+                                    {% if form.phone_number.errors %}
+                                        <div class="text-danger mt-1">
+                                            {{ form.phone_number.errors|join:", " }}
+                                        </div>
+                                    {% endif %}
+                                </div> -->
+                            
+                                <!-- Password input -->
+                                <div class="form-group mb-4">
+                                    <label for="id_password1">Password</label>
+                                    <input type="password" id="id_password1" name="password1" class="form-control">
+                                    {% if form.password1.errors %}
+                                        <small class="text-danger">{{ form.password1.errors }}</small>
+                                    {% endif %}
+                                </div>
+                            
+                                <!-- Confirm Password input -->
+                                <div class="form-group mb-4">
+                                    <label for="id_password2">Confirm Password</label>
+                                    <input type="password" id="id_password2" name="password2" class="form-control">
+                                    {% if form.password2.errors %}
+                                        <small class="text-danger">{{ form.password2.errors }}</small>
+                                    {% endif %}
+                                </div>
+                            
+                                <!-- Submit Button -->
+                                <button type="submit" class="btn btn-primary btn-block mb-4">Sign Up</button>
+
+                            </form>
+                        </div>
+
+
+
+                        <p id="toggle-link"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Bootstrap JS and Custom JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script>
+        // Toggle between login and signup forms
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const formTitle = document.getElementById('form-title');
+        const loginBtn = document.getElementById('login-btn');
+        const signupBtn = document.getElementById('signup-btn');
+    
+        // Function to switch forms based on hash
+        function switchForm(hash, openSignup) {
+            if (hash === '#signup' || openSignup) {
+                signupForm.classList.add('active');
+                loginForm.classList.remove('active');
+                formTitle.innerText = 'Create Your Account';
+                window.location.hash = '#signup';  // Update URL
+
+                // Set Sign Up button as active and Login button as inactive
+                signupBtn.classList.add('btn-secondary');
+                signupBtn.classList.remove('btn-outline-secondary');
+                loginBtn.classList.add('btn-outline-secondary');
+                loginBtn.classList.remove('btn-secondary');
+
+            } else {
+                loginForm.classList.add('active');
+                signupForm.classList.remove('active');
+                formTitle.innerText = 'Login to Your Account';
+                window.location.hash = '#login';  // Update URL
+
+                // Set Login button as active and Sign Up button as inactive
+                loginBtn.classList.add('btn-secondary');
+                loginBtn.classList.remove('btn-outline-secondary');
+                signupBtn.classList.add('btn-outline-secondary');
+                signupBtn.classList.remove('btn-secondary');
+
+            }
+        }
+    
+        // Add event listeners to buttons
+        loginBtn.addEventListener('click', function () {
+            switchForm('#login');
+        });
+    
+        signupBtn.addEventListener('click', function () {
+            switchForm('#signup');
+        });
+    
+        // Check the current hash when the page is loaded
+        window.addEventListener('load', function() {
+            const hash = window.location.hash;
+            const openSignup = "{{ open_signup|default:False }}";  // Check context variable
+
+            switchForm(hash, openSignup === 'True');
+
+        });
+    </script>
+</body>
+</html>

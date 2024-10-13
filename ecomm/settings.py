@@ -59,13 +59,13 @@ MIDDLEWARE = [
 
 ]
 
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
+# AUTHENTICATION_BACKENDS = [
+#     # Needed to login by username in Django admin, regardless of `allauth`
+#     'django.contrib.auth.backends.ModelBackend',
 
-    # `allauth` specific authentication methods, such as login by email
-    'accounts.auth_backend.PhoneNumberAuthBackend',
-]
+#     # `allauth` specific authentication methods, such as login by email
+#     # 'accounts.auth_backend.PhoneNumberAuthBackend',
+# ]
 
 ROOT_URLCONF = 'ecomm.urls'
 
@@ -130,11 +130,13 @@ USE_I18N = True
 
 USE_TZ = True
 
-ACCOUNT_FORMS = {
-    'signup': 'accounts.views.CustomSignupForm',
-    'login': 'accounts.views.CustomLoginForm',  # Adjust the path to point to your custom form
-}
+# ACCOUNT_FORMS = {
+#     'signup': 'accounts.views.CustomSignupForm',
+#     'login': 'accounts.views.CustomLoginForm',  # Adjust the path to point to your custom form
+# }
 
+LOGIN_URL = '/accounts/login/'
+SIGNUP_URL = '/accounts/login/#signup/'
 # Set email as not required, but keep verification behavior
 ACCOUNT_EMAIL_REQUIRED = False
 ACCOUNT_EMAIL_VERIFICATION = "optional"

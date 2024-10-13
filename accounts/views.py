@@ -6,6 +6,10 @@ from django.core.exceptions import ValidationError
 from allauth.account.forms import SignupForm, LoginForm
 from allauth.account.utils import setup_user_email
 from allauth.account.models import EmailAddress
+from allauth.account.views import LoginView, SignupView
+
+from allauth.account import views as allauth_views
+
 
 from accounts.models import Profile
 
@@ -46,6 +50,7 @@ class CustomSignupForm(SignupForm):
 
 class CustomLoginForm(LoginForm):
     phone_number = forms.CharField(max_length=15, required=False, label="Phone Number")
+    print(phone_number)
 
 
     def clean(self):
@@ -58,3 +63,29 @@ class CustomLoginForm(LoginForm):
             pass  # Implement custom authentication logic here
 
         return cleaned_data
+
+
+
+def login_signup_view(request):
+
+    print('login signup form')
+
+    login_form = CustomLoginForm()  # Instantiate login form
+    signup_form = CustomSignupForm()  # Instantiate signup form
+
+
+    return render(request, 'accounts/login_signup.html', {
+        'login_form': login_form,
+        'signup_form': signup_form
+    })
+
+
+
+
+class CustomSignupView(SignupView):
+    template_name = 'accounts/login_signup.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['open_signup'] = True  # Add variable to open signup form
+        return context
