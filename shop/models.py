@@ -22,10 +22,18 @@ class Product(models.Model):
         return self.name
 
 
-
 class Cart(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f"{self.user}'s Cart"
+
+
+class Cart_Item(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
     quantity = models.IntegerField()
     
 

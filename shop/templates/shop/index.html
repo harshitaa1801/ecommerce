@@ -398,23 +398,30 @@
 
 
   function addToCart(productId) {
-    console.log('inside cart fn')
-    console.log(productId)
-        fetch(`/shop/add-to-cart/${productId}`, {
-            method: 'GET',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest'
-            },
-        })
-        .then(response => response.json())
-        .then(data => {
+    fetch(`/shop/add-to-cart/${productId}`, {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+    })
+    .then(response => {
+        if (response.status === 401) {
+            // If not logged in, redirect to the login page
+            window.location.href = `/accounts/login/?next=/shop/add-to-cart/${productId}/`;
+        } else {
+            return response.json();
+        }
+    })
+    .then(data => {
+        if (data) {
             alert(data.message); // Display a message that the product has been added
             updateCartCount(productId); // Update the cart count if you have this on your page
-        })
-        .catch(error => {
-            console.error('Error adding item to cart:', error);
-        });
-    }
+        }
+    })
+    .catch(error => {
+        console.error('Error adding item to cart:', error);
+    });
+}
 
     function updateCartCount(id) {
         // update the cart item count on the page
@@ -422,7 +429,9 @@
         cart[id] = (cart[id] !== undefined) ? cart[id] + 1 : 1;
 
         localStorage.setItem('cart', JSON.stringify(cart));
+        console.log(cart)
         document.getElementById('cart').innerHTML = Object.keys(cart).length;
+        
 
     }
 </script>

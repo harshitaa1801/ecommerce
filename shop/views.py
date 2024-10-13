@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django_user_agents.utils import get_user_agent
+from django.contrib.auth.decorators import login_required
 
-from .models import Product
+from ecomm.custom_decorator import ajax_login_required
+
+
+from .models import Cart, Cart_Item, Product
 # Create your views here.
 
 
@@ -64,12 +68,31 @@ def tracker(request):
 def checkout(request):
     return HttpResponse('This is checkout page')
 
-
+@ajax_login_required
 def add_to_cart(request, id):
     print('request: ', request)
     print(request.user)
     print(id)
 
+    try:
+        product = Product.objects.get(id=id)
+    except Product.DoesNotExist:
+        return JsonResponse({'message': "This product does not exist"})
+    
+    try:
+        cart = Cart.objects.get(user = request.user)
+    except Cart.DoesNotExist:
+        cart = Cart.objects.create(user=request.user)
 
+
+    item_set = Cart_Item.objects.filter(cart=cart, product = product)
+
+    if item_set.exists():
+        item = item_set.first()
+        item.quantity += 1
+        item.save()
+    
+    else:
+        Cart_Item.objects.create(cart=cart, product = product, quantity=1)
 
     return JsonResponse({'message':f'You are adding product id {id} to cart'})
