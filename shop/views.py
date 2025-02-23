@@ -152,7 +152,7 @@ def update_cart(request, cart_item_id):
     })
 
 
-
+@login_required
 def place_order(request):
     if request.method == 'GET':
         user=request.user
