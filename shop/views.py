@@ -190,9 +190,11 @@ def place_order(request):
             address=address,
             total_price=amount / 100,
             cart_id=cart_id,
-            items = Cart_Item.objects.filter(cart_id = cart_id),
             user=user
         )
+
+        cart_items = Cart_Item.objects.filter(cart_id = cart_id)
+        order.items.set(cart_items)
 
         razorpay_order = RAZORPAY_CLIENT.order.create({
             "amount": amount,
