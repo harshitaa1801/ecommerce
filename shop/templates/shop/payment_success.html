@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Successful</title>
+</head>
+<body>
+    <h2>Payment Successful</h2>
+    <p>Thank you, {{ order.name }}! Your payment of ₹{{ order.total_price }} has been received.</p>
+    <p>Your order ID is <strong>{{ order.id }}</strong>.</p>
+    <p>We will deliver to: <strong>{{ order.address }}</strong></p>
+    <a href="/">Go back to Home</a>
+</body>
+</html>

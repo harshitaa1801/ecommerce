@@ -1,0 +1,101 @@
+{% extends 'shop/basic.html' %}
+
+{% block title %}Your Cart{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2>Your Cart</h2>
+    {% if cart_items %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr id="cart-item-{{ item.id }}">
+                    <td>{{ item.product.name }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-secondary decrease-qty" data-id="{{ item.id }}">-</button>
+                        <span class="quantity">{{ item.quantity }}</span>
+                        <button class="btn btn-sm btn-secondary increase-qty" data-id="{{ item.id }}">+</button>
+                    </td>
+                    <td>Rs. {{ item.product.price }}</td>
+                    <td class="item-total">Rs. {{ item.total_price }}</td>
+                    <td>
+                        <a href="{% url 'RemoveFromCart' item.id %}" class="btn btn-danger btn-sm">Remove</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h4>Total: Rs. <span id="cart-total">{{ total }}</span></h4>
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+    <a href="{% url 'ShopHome' %}" class="btn btn-primary">Continue Shopping</a>
+    {% if cart_item_count > 0 %}
+        <a href="{% url 'place_order' %}?cart_id={{cart_id}}" class="btn btn-primary">Place Order</a>
+    {% endif %}
+    </div>
+{% endblock %}
+
+{% block js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const updateQuantity = (itemId, action) => {
+        fetch(`/update-cart/${itemId}/?action=${action}`, {
+            method: 'GET',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.deleted) {
+                document.getElementById(`cart-item-${itemId}`).remove();
+            } else {
+                const row = document.getElementById(`cart-item-${itemId}`);
+                row.querySelector('.quantity').textContent = data.quantity;
+                row.querySelector('.item-total').textContent = 'Rs.' + data.total.toFixed(2);
+            }
+            document.getElementById('cart-total').textContent = data.cart_total.toFixed(2);
+            updateCartCount();
+        })
+        .catch(error => console.error('Error updating cart:', error));
+    };
+
+    document.querySelectorAll('.increase-qty').forEach(button => {
+        button.addEventListener('click', () => updateQuantity(button.dataset.id, 'increase'));
+    });
+
+    document.querySelectorAll('.decrease-qty').forEach(button => {
+        button.addEventListener('click', () => updateQuantity(button.dataset.id, 'decrease'));
+    });
+});
+
+function updateCartCount() {
+    fetch('/cart/', {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+    })
+    .then(response => response.text())
+    .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const cartCount = doc.getElementById('cart').textContent;
+        document.getElementById('cart').textContent = cartCount;
+    })
+    .catch(error => {
+        console.error('Error updating cart count:', error);
+    });
+}
+</script>
+{% endblock %}

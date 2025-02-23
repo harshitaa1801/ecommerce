@@ -423,16 +423,23 @@
     });
 }
 
-    function updateCartCount(id) {
-        // update the cart item count on the page
-        cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {};
-        cart[id] = (cart[id] !== undefined) ? cart[id] + 1 : 1;
-
-        localStorage.setItem('cart', JSON.stringify(cart));
-        console.log(cart)
-        document.getElementById('cart').innerHTML = Object.keys(cart).length;
-        
-
-    }
+  function updateCartCount() {
+    fetch('/cart/', {
+        method: 'GET',
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        },
+    })
+    .then(response => response.text())
+    .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const cartCount = doc.getElementById('cart').textContent;
+        document.getElementById('cart').textContent = cartCount;
+    })
+    .catch(error => {
+        console.error('Error updating cart count:', error);
+    });
+}
 </script>
 {% endblock %}
