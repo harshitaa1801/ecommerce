@@ -11,7 +11,7 @@
         </p>
         <div class="about-info">
             <div>
-                <p> Welcome to Luxe Candles, where creativity knows no bounds and imagination takes flight. At [Crafting Brand], we believe in the transformative power of crafting – it's more than just a hobby; it's a way of life.
+                <p> Welcome to Luxe Candles, where creativity knows no bounds and imagination takes flight. At Luxe Candles, we believe in the transformative power of crafting – it's more than just a hobby; it's a way of life.
                     Our journey began with a simple passion for creation and a desire to share the joy of crafting with the world.
                     At the heart of Luxe Candles lies a commitment to quality, innovation, and sustainability. We take pride in sourcing the finest materials, curating inspiring designs, and fostering ethical practices that honor both the art and the environment.
                     Thank you for choosing Luxe Candles. Let's craft something extraordinary together.
@@ -80,14 +80,21 @@
 <!-- Global Styles -->
 <style>
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;    
+
+    /* background: rgb(238, 237, 235); */
+    background: linear-gradient(360deg, rgb(238, 237, 235) 30%, rgb(116, 114, 100) 90%);
+
     font-family: Arial, sans-serif;
 }
 
 /* About Section */
 
 .about {
-    background: rgb(238, 237, 235);
-    background: linear-gradient(360deg, rgb(238, 237, 235) 0%, rgb(116, 114, 100) 100%);
+    /* background: rgb(238, 237, 235);
+    background: linear-gradient(360deg, rgb(238, 237, 235) 0%, rgb(116, 114, 100) 100%); */
     padding: 100px 0 20px 0;
     text-align: center;
 }
@@ -220,6 +227,8 @@ button:hover {
 
 /* Footer */
 footer {
+    margin-top: auto;
+
     background-color: #222;
     color: white;
     text-align: center;
