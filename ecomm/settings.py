@@ -32,9 +32,9 @@ SECRET_KEY = 'django-insecure-k^gwy*3wzl*72!7eg&s&e1v@1hyi^(6_fu9nisiushs(ew)mg%
 DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app', 'd9f7-103-191-112-152.ngrok-free.app',
-                 '127.0.0.1', 'ecommerce-0nk8.onrender.com']
+                 '127.0.0.1', 'ecommerce-0nk8.onrender.com', 'luxecandles.studio']
 
-CSRF_TRUSTED_ORIGINS= ['https://ecommerce-0nk8.onrender.com']
+CSRF_TRUSTED_ORIGINS= ['https://ecommerce-0nk8.onrender.com', 'https://luxecandles.studio']
 # Application definition
 
 INSTALLED_APPS = [
@@ -174,4 +174,5 @@ MEDIA_URL = '/media/'
 
 
 STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

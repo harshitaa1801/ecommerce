@@ -5,6 +5,9 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
+      - static_data:/app/staticfiles 
+      - media:/app/media
+
     ports:
       - "8000:8000"
     env_file:
@@ -31,11 +34,13 @@ services:
       - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - static_volume:/home/app/static
-      - media_volume:/home/app/media
+      - static_data:/home/app/static
+      - media:/home/app/media
       - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
       - web
 
 volumes:
   pgdata:
+  static_data:
+  media:
