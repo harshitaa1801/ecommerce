@@ -109,9 +109,11 @@
     font-size: 18px;
     font-weight: bold;
     color: #333;
+    text-align: center;
   }
 
   .card-text {
+    text-align: center;
     color: #666;
   }
 
@@ -202,9 +204,9 @@
     display: none;
   } */
   .card {
-  height: 180px; 
+  /* height: 180px;  */
   padding: 2px;
-  /* height: auto; */
+  height: auto;
 
   margin-bottom: 10px; 
   }
@@ -216,18 +218,29 @@
   }
 
   .card-title {
+    text-align: center;
     font-size: 12px; /* Adjust font size for mobile view */
   }
 
-  /* .card-text {
-    font-size: 14px; /* Adjust font size for mobile view */
-  /* } */
-
   .card-text {
-    display: none; /* Hide product description in mobile view */
+    text-align:center;
+    font-size: 10px; /* Adjust font size for mobile view */
+    display: block;
+    overflow: hidden;            /* Hide overflowing content */
+    text-overflow: ellipsis;     /* Add "..." if too long */
+    display: -webkit-box;        /* Multi-line ellipsis support */
+    -webkit-line-clamp: 2;       /* Show only 2 lines */
+    -webkit-box-orient: vertical;
+    word-break: break-word;      /* Break long words if needed */
+    white-space: normal;         /* Allow text to wrap */
+    max-width: 100%;
   }
 
-  .card-img-top {
+  .card-text:last-child {
+    margin-bottom: 30px;
+  }
+
+.card-img-top {
     height: 100%; /* Reduce height for mobile view */
     object-fit: cover; /* Ensure the image covers the area */
   }
