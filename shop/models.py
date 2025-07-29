@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
+from cloudinary.models import CloudinaryField # Import CloudinaryField
 
 class Category(models.Model):
     name = models.CharField(max_length=20)
@@ -8,14 +9,19 @@ class Category(models.Model):
         return self.name
 
 
-
+def get_product_image_path(instance, filename):
+    # instance is the Product object.
+    # filename is the original name of the uploaded file.
+    # This will create a path like: 'products/12/image.jpg'
+    return f'products/{instance.category.name}/{filename}'
 
 class Product(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=20, null=True, blank=True)
     image = models.ImageField(upload_to='shop/images')
-    description = models.TextField()
-    published_on = models.DateField()
-    price = models.IntegerField()
+    image_file = models.ImageField(upload_to=get_product_image_path)
+    description = models.TextField(null=True, blank=True)
+    published_on = models.DateField(auto_now_add=True, null=True, blank=True)
+    price = models.IntegerField(null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
 
     def __str__(self):

@@ -5,6 +5,8 @@ certifi==2020.6.20
 cffi==1.16.0
 chardet==4.0.0
 click==8.0.3
+cloudinary==1.44.1
+django-cloudinary-storage==0.3.0
 colorama==0.4.4
 cryptography==3.4.8
 distlib==0.3.8

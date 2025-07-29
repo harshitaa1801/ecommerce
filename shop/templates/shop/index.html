@@ -328,8 +328,11 @@
             {% for i in products %}
             <div class="col-3 col-sm-6 col-md-3">
               <div class="card" data-height="250px">
+
                 <!-- <a href="/products/{{ i.id }}"> -->
-                <img src='/media/{{ i.image }}' class="card-img-top" alt="{{ i.name }}">
+
+
+                <img src='{{ i.image_file.url }}' class="card-img-top" alt="{{ i.name }}">
               </a>
                 <div class="card-body">
                   <!-- <a href="/products/{{ i.id }}"><h5 class="card-title">{{ i.name }}</h5></a> -->
