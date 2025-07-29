@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.views.generic.base import RedirectView
+from django.conf import settings
 
 
 urlpatterns = [
@@ -21,5 +23,7 @@ urlpatterns = [
     # path('order-confirmation/<int:order_id>/', views.order_confirmation, name='order_confirmation'),
     path('place-order/', views.place_order, name='place_order'),
     path('payment-success/', views.payment_success, name='payment_success'),
+
+    path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'images/favicon.png', permanent=True)),
 
 ]
