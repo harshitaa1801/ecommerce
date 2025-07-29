@@ -17,8 +17,7 @@ def get_product_image_path(instance, filename):
 
 class Product(models.Model):
     name = models.CharField(max_length=20, null=True, blank=True)
-    image = models.ImageField(upload_to='shop/images')
-    image_file = models.ImageField(upload_to=get_product_image_path)
+    image = models.ImageField(upload_to=get_product_image_path)
     description = models.TextField(null=True, blank=True)
     published_on = models.DateField(auto_now_add=True, null=True, blank=True)
     price = models.IntegerField(null=True, blank=True)
