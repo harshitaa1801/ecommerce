@@ -32,7 +32,7 @@ SECRET_KEY = 'django-insecure-k^gwy*3wzl*72!7eg&s&e1v@1hyi^(6_fu9nisiushs(ew)mg%
 DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app', 'd9f7-103-191-112-152.ngrok-free.app',
-                 '127.0.0.1', 'ecommerce-0nk8.onrender.com', 'luxecandles.studio']
+                 '127.0.0.1', 'ecommerce-0nk8.onrender.com', 'luxecandles.studio', '64.227.161.175']
 
 CSRF_TRUSTED_ORIGINS= ['https://ecommerce-0nk8.onrender.com', 'https://luxecandles.studio']
 # Application definition

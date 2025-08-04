@@ -5,7 +5,7 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
-      - static_data:/app/staticfiles 
+      - static_data:/app/staticfiles/staticfiles_build 
       - media:/app/media
 
     ports:
@@ -24,8 +24,6 @@ services:
       POSTGRES_USER: ${POSTGRES_USER}    # Uses environment variable from Render
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}  # Uses environment variable from Render
       PGDATA: /data/postgres
-    ports:
-      - "5432:5432"
     volumes:
       - ./volume/postgres:/data/postgres
     networks:
@@ -39,7 +37,7 @@ services:
       - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
-      - static_data:/app/static
+      - static_data:/app/staticfiles/staticfiles_build 
       - media:/app/media
       - /etc/letsencrypt:/etc/letsencrypt
     depends_on:
