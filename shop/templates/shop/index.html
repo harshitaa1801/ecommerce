@@ -91,8 +91,7 @@
     text-align: center; /* Center align */
     margin-top: 30px; /* Add spacing above */
     margin-bottom: 20px; /* Add spacing below */
-    text-transform: uppercase; /* Make text uppercase */
-    border-bottom: 2px solid #3C3633; /* Add a bottom border */
+    text-transform: capitalize; /* Make text uppercase */
     display: inline-block;
     padding-bottom: 5px;
   }
@@ -180,13 +179,7 @@
   overflow: hidden;
 }
 
-.custom-arrow-icon {
-  color: #3C3633;  /* Replace with your desired color code */
-  margin-left: 8px;  /* Optional: adds some space between the category name and the icon */
-   /* TODO  Enable it when creating pages for different categories  */
-  /* cursor: pointer;  Change the cursor to a pointer to indicate the link is clickable */
-  transition: color 0.3s ease;
-}
+
 
 @media (max-width: 767px) {
   .col-3.col-sm-6.col-md-3 {
@@ -225,12 +218,16 @@
   .card-text {
     text-align:center;
     font-size: 10px; /* Adjust font size for mobile view */
-    display: block;
+
+    /* --- Properties for multi-line truncation --- */
     overflow: hidden;            /* Hide overflowing content */
     text-overflow: ellipsis;     /* Add "..." if too long */
     display: -webkit-box;        /* Multi-line ellipsis support */
+    line-clamp: 2;  
     -webkit-line-clamp: 2;       /* Show only 2 lines */
     -webkit-box-orient: vertical;
+
+
     word-break: break-word;      /* Break long words if needed */
     white-space: normal;         /* Allow text to wrap */
     max-width: 100%;
@@ -314,7 +311,6 @@
   <h2 id="{{ products.0.category.name|slugify }}" class="section-heading">{{ products.0.category }}
     <!-- TODO  Enable it when creating pages for different categories -->
     <!-- <a href="/category/{{ products.0.category.id }}" class="category-link"> -->
-      <i class="fas fa-chevron-right custom-arrow-icon"></i>
     <!-- </a> -->
   </h2>
   <div class="row">
@@ -338,7 +334,7 @@
                 <div class="card-body">
                   <!-- <a href="/products/{{ i.id }}"><h5 class="card-title">{{ i.name }}</h5></a> -->
                    <h5 class="card-title">{{ i.name }}</h5>
-                  <p class="card-text">{{ i.description|slice:":100" }}{% if i.description|length > 100 %}...{% endif %}</p>
+                  <p class="card-text">{{ i.description|slice:":100"|linebreaksbr }}{% if i.description|length > 100 %}...{% endif %}</p>
                 </div>
               
                 <div class="card-footer">
